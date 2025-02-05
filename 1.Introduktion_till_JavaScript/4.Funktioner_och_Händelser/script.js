@@ -13,5 +13,5 @@ function changeColor(button){
 }
 
 alert("check the sum function in the console");
-console.log("summan av: " + x + "+" + y + "=" + sum(x,y));
+console.log("summan av: " + x + "+" + y + " är " + sum(x,y));
 
