@@ -9,7 +9,7 @@ function changeColor(button){
     rnd1 = Math.floor(Math.random() * 255);
     rnd2 = Math.floor(Math.random() * 255);
     rnd3 = Math.floor(Math.random() * 255);
-    button.style.backgroundColor = `rgb(${rnd1}, ${rnd2}, ${rnd3})`;
+    document.body.style.backgroundColor = `rgb(${rnd1}, ${rnd2}, ${rnd3})`;
 }
 
 alert("check the sum function in the console");
