@@ -5,7 +5,7 @@ function sum( x, y){
     return x+y;
 }
 
-function changeColor(button){
+function changeColor(){
     rnd1 = Math.floor(Math.random() * 255);
     rnd2 = Math.floor(Math.random() * 255);
     rnd3 = Math.floor(Math.random() * 255);
