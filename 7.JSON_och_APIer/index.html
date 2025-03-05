@@ -10,13 +10,19 @@
 
         <h1>Temperature</h1>
         <button onclick="getTempAPI()">Update temperature</button>
-        <p>The temperature in Töllsjö is:</p><p id="tempAPI"></p>
+        <p id="tempAPI">Press the button above to se the current temperature in Töllsjö</p>
+
         <h1>Search a picture</h1>
         <label>
-        <input type="text" placeholder="write here" >
+            <input type="text" id="input" placeholder="Enter search term">
         </label>
+        <button onclick="getImgAPI()">Search</button>
+        
+        <p>Enter a word above to search for pictures</p>
 
-        <button onclick="add()">Add</button>
+        <div class="images">
+
+        </div>
      <!--   <button onclick="remove(this)">Remove</button>  -->
 
     </body>

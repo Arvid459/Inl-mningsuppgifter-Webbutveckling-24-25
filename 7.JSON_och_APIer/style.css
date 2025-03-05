@@ -1,1 +1,11 @@
-/*nothing*/
+img{
+    width: clamp(100px, 45%, 300px);
+    height: auto;
+    padding-top: 4%;
+}
+
+.images{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
