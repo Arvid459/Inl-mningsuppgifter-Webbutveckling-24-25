@@ -1,13 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="style.css">
         <script src="script.js" defer></script>
+        <title>Radio Button Storage</title>
     </head>
     <body>
-<input type="radio" onclick="cookie()">
-    </body>
-    <footer>
+        <input type="checkbox" id="myRadio">
 
-    </footer>
+        <div id="login">
+            <input type="text" id="username" placeholder="Enter a username">
+            <input type="text" id="password" placeholder="Enter a password">
+            <button id="submitt" onclick="saveInformation()">Submitt</button>
+        </div>
+
+        <div id="keyTracker">
+            <p id="pressedKeys" onkeypress="this.KeyboardEvent"></p>
+        </div>
+    </body>
 </html>
