@@ -14,6 +14,10 @@ function saveInformation(){
     }
 }
 
+function logKey(event){
+    pressedKeys.textContent = pressedKeys.textContent + event.key;
+}
+
 document.addEventListener("DOMContentLoaded", function () {
 
     console.log(sessionStorage.getItem("radioChecked"));
@@ -32,8 +36,11 @@ document.addEventListener("DOMContentLoaded", function () {
         sessionStorage.setItem("radioChecked", radio.checked);
     });
 
-});
+    document.addEventListener("keydown", function(event) {
+        logKey(event);
+    });
 
+});
 
 
 
