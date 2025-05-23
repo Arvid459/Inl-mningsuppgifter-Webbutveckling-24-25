@@ -3,7 +3,7 @@ body{
 }
 
 
-
+/*
 
 #login{
 background-color: rgb(201, 201, 201);
@@ -27,3 +27,29 @@ border-radius: 10px;
     z-index: 99;
 }
     */
+
+
+    .content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+}
+
+
+.box {
+  width: 200px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  padding: 8px;
+  text-align: center;
+  background-color: #fff;
+}
+
+.box img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}

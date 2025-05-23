@@ -44,4 +44,50 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-//session
+
+function displayMovies(movies) {
+  const content = document.getElementById('content');
+  content.innerHTML = ''; // Clear previous results
+
+  movies.forEach(movie => {
+    const box = document.createElement('div');
+    box.className = 'box';
+    box.innerHTML = `
+      <img src="${movie.Poster !== "N/A" ? movie.Poster : 'https://via.placeholder.com/200x300?text=No+Image'}" alt="${movie.Title}">
+      <h3>${movie.Title}</h3>
+      <p>${movie.Year}</p>
+    `;
+    content.appendChild(box);
+  });
+}
+
+
+
+
+const apiKey = 'bc042a71'; 
+const searchTerm = 'Batman';
+const page = 1; 
+
+function getMovies(){
+fetch(`https://www.omdbapi.com/?apikey=${apiKey}&s=${searchTerm}&page=${page}`)
+  .then(response => response.json())
+  .then(data => {
+    if (data.Response === "True") {
+      console.log(data.Search); 
+      displayMovies(data.Search)
+    } else {
+      console.log("Inga filmer hittades.");
+    }
+  })
+  .catch(error => {
+    console.error("Något gick fel:", error);
+  });
+
+}
+
+getMovies()
+  
+
+
+
+
