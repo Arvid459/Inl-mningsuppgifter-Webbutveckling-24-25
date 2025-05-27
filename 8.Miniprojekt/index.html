@@ -1,27 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="style.css">
-        <script src="script.js" defer></script>
-        <title>⚠ Active Key Logger</title>
-    </head>
-    <body>
-        <input type="checkbox" id="myRadio">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+    <title>Movies to see</title>
+  </head>
+  <body>
+    <div class="toDo">
+      <h2>Movies to see</h2>
 
-        <div id="login">
-            <input type="text" id="username" placeholder="Enter a username">
-            <input type="text" id="password" placeholder="Enter a password">
-            <button id="submitt" onclick="saveInformation()">Submitt</button>
-        </div>
+      <ul id="movieList"></ul>
+    </div>
 
-        <div id="keyTracker">
-            <p id="pressedKeys"></p>
-        </div>
-        <div id="content">
-            <div class="box"></div>
-
-        </div>
-    </body>
+    <div class="searchBox">
+      <h1>Search a movie</h1>
+    </div>
+    <div class="searchBox">
+      <label>
+        <input type="text" id="searchInput" placeholder="Enter search term" />
+      </label>
+      <button id="searchBtn">Search</button>
+    </div>
+    <div id="content"></div>
+  </body>
 </html>
