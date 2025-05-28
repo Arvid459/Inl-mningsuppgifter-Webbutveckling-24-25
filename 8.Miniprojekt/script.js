@@ -1,47 +1,125 @@
-const radio = document.getElementById("myRadio");
-const username = document.getElementById("username");
-const password = document.getElementById("password");
-const pressedKeys = document.getElementById("pressedKeys");
+const apiKey = "bc042a71";
+let allMovies = [];
+const toDo = [];
 
+function getMovies() {
+  const searchTerm = document.getElementById("searchInput").value.trim();
+  const content = document.getElementById("content");
+  content.innerHTML = "";
+  allMovies = [];
 
-function saveInformation(){
-    if (username.value.trim() === "" || password.value.trim() === ""){
-        alert("You need to enter both username and password");
-    }
-    else{
-        localStorage.setItem("username", username.value);
-        localStorage.setItem("password", password.value);
-    }
+  if (!searchTerm) {
+    alert("Please enter a movie title.");
+    return;
+  }
+
+  const pageRequests = [];
+  for (let i = 1; i < 3; i++) {
+    const url = `https://www.omdbapi.com/?apikey=${apiKey}&s=${searchTerm}&page=${i}`;
+    pageRequests.push(fetch(url).then((res) => res.json()));
+  }
+
+  Promise.all(pageRequests)
+    .then((responses) => {
+      responses.forEach((data) => {
+        if (data.Response === "True") {
+          allMovies = allMovies.concat(data.Search);
+        }
+      });
+
+      if (allMovies.length > 0) {
+        displayMovies(allMovies);
+      } else {
+        content.innerHTML = "<p>No movies found.</p>";
+      }
+    })
+    .catch((error) => {
+      console.error("Something went wrong:", error);
+    });
 }
 
-function logKey(event){
-    pressedKeys.textContent = pressedKeys.textContent + event.key;
+function displayMovies(movies) {
+  const content = document.getElementById("content");
+  content.innerHTML = "";
+
+  movies.forEach((movie, index) => {
+    const box = document.createElement("div");
+    box.className = "box";
+
+    box.innerHTML = `
+            <img src="${
+              movie.Poster !== "N/A"
+                ? movie.Poster
+                : "https://dummyimage.com/200x300?text=No+Image"
+            }" alt="${movie.Title}">
+            <h3>${movie.Title}</h3>
+            <p>${movie.Year}</p>
+        `;
+
+    box.addEventListener("click", () => MovieAdd(index));
+    content.appendChild(box);
+  });
 }
 
-document.addEventListener("DOMContentLoaded", function () {
+function MovieAdd(index) {
+  const movie = allMovies[index];
+  const name = movie.Title;
 
-    console.log(sessionStorage.getItem("radioChecked"));
+  if (toDo.includes(name)) {
+    alert("This movie is already on your list.");
+    return;
+  } else {
+    alert("Movie is successfully added.");
+  }
 
-    if (sessionStorage.getItem("radioChecked") === "true") {
-        radio.checked = sessionStorage.getItem("radioChecked");
-    }
+  toDo.push(name);
+  updateToDo();
+}
 
-    if (localStorage.getItem("username") && localStorage.getItem("password")){
-        username.value = localStorage.getItem("username");
-        password.value = localStorage.getItem("password");
-    }
+function removeMovie(name) {
+  const index = toDo.indexOf(name);
+  if (index > -1) {
+    toDo.splice(index, 1);
+    updateToDo();
+  }
+}
 
-    // Store the checked state when clicked
-    radio.addEventListener("click", function () {
-        sessionStorage.setItem("radioChecked", radio.checked);
+function updateToDo() {
+  const movieList = document.getElementById("movieList");
+  movieList.innerHTML = "";
+
+  //set local storage data
+  localStorage.setItem("toDo", JSON.stringify(toDo));
+
+  toDo.forEach((name) => {
+    const li = document.createElement("li");
+    li.textContent = name;
+
+    const removeBtn = document.createElement("button");
+    removeBtn.textContent = "X";
+    removeBtn.onclick = () => removeMovie(name);
+
+    li.appendChild(removeBtn);
+    movieList.appendChild(li);
+  });
+}
+
+//get local storage data
+document.addEventListener("DOMContentLoaded", () => {
+  const storedMovies = localStorage.getItem("toDo");
+  if (storedMovies) {
+    toDo.push(...JSON.parse(storedMovies));
+    updateToDo();
+  }
+  document
+    .getElementById("searchInput")
+    .addEventListener("keydown", function (event) {
+      if (event.key === "Enter") {
+        getMovies();
+      }
     });
-
-    document.addEventListener("keydown", function(event) {
-        logKey(event);
-    });
-
+  const searchBtn = document.getElementById("searchBtn");
+  if (searchBtn) {
+    searchBtn.addEventListener("click", getMovies);
+  }
 });
-
-
-
-//session
