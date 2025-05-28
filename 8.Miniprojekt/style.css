@@ -115,7 +115,7 @@ h2 {
 @media (orientation: portrait) {
   .toDo {
     position: static;
-    width: 90%;
+    width: 100%;
     height: auto;
     box-shadow: none;
     border-bottom: 1px solid #ccc;
@@ -132,6 +132,31 @@ h2 {
     font-size: 15px;
   }
   .box {
-    width: 160px;
+    width: 280px;
+  }
+
+  h1 {
+    font-size: 3em;
+  }
+  h2 {
+    font-size: 2em !important;
+  }
+  h3 {
+    font-size: 1.8em;
+  }
+  p {
+    font-size: 1.6em;
+  }
+  li {
+    font-size: 1.7em !important;
+  }
+  input {
+    font-size: 1.5em !important;
+  }
+  button {
+    font-size: 1.5em !important;
+  }
+  #movieList button {
+    font-size: 1em !important;
   }
 }
